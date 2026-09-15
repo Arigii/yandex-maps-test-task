@@ -1,0 +1,16 @@
+reviews.archibald-lappline.site {
+    encode gzip
+
+    handle /api/* {
+        reverse_proxy nginx:80
+    }
+    handle /sanctum/* {
+        reverse_proxy nginx:80
+    }
+
+    handle {
+        root * /srv/yandex-reviews-frontend
+        try_files {path} /index.html
+        file_server
+    }
+}
